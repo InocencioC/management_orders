@@ -19,7 +19,7 @@ import java.util.UUID;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID ui;
+    private UUID id;
 
     @CreationTimestamp
     private LocalDateTime created;
@@ -29,6 +29,13 @@ public class Order {
     private User user;
 
     private Integer fulfilledQuantity = 0;
+
+    @ManyToOne
+    @JoinColumn(name = "item_id", nullable = false)
+    private Item item;
+
+    @Column(nullable = false)
+    private Integer quantity;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
